@@ -1,18 +1,51 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\AboutController;
+use App\Http\Controllers\Frontend\contcatController;
+use App\Http\Controllers\Frontend\productController;
+use App\Http\Controllers\Frontend\indexController;
+use App\Http\Controllers\Frontend\orderController;
+use App\Http\Controllers\Auth\logoutController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\Frontend\userController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
+Route::get('/home',[HomeController::class,'home']);
+Route::get('/redirect',[HomeController::class,'redirect']);
+Route::get('/index',[indexController::class,'index']);
+Route::get('/',[ProjectController::class,'admin']);
+Route::get('/logout',[logoutController::class,'logout']);
+Route::get('/about',[AboutController::class,'index']);
+Route::get('/products',[productController::class,'index']);
+Route::get('/contcat',[contcatController::class,'index']);
+Route::get('/order',[productController::class,'order']);
+Route::get('/create',[productController::class,'create']);
+Route::post('/admin/store',[productController::class,'store']);
+Route::post('/frontend/save',[orderController::class,'save']);
+Route::get('/push',[orderController::class,'order']);
+Route::get('/allproducts',[productController::class,'allproducts']);
+Route::get('/remove/{id}', [productController::class,'remove']);
+Route::get('/edit/{id}',[productController::class,'edit']);
+Route::put('/update/{id}',[productController::class,'update']);
+Route::get('/order',[orderController::class,'allorders']);
+Route::get('/deelete/{id}', [orderController::class,'deelete']);
+Route::get('/ediit/{id}',[orderController::class,'ediit']);
+Route::put('/updatee/{id}',[orderController::class,'updatee']);
+Route::post('/frontend/storee',[contcatController::class,'storee']);
+Route::get('/search',[productController::class,'search']);
+Route::get('/searchproduct',[productController::class,'searchproduct']);
+Route::get('/users',[userController::class,'user']);
+Route::get('/delete/{id}', [userController::class,'delete']);
+Route::get('/men',[productController::class,'viewmen']);
+Route::get('/woman',[productController::class,'viewwoman']);
+Route::post('/admin/stoore',[AboutController::class,'stoore']);
+Route::get('/socialmedia',[AboutController::class,'social']);
+Route::get('/showsocial',[AboutController::class,'showsocial']);
+Route::get('/rremove/{id}', [AboutController::class,'rremove']);
+Route::get('/eedit/{id}',[AboutController::class,'eedit']);
+Route::put('/uupdate/{id}',[AboutController::class,'uupdate']);
+Route::get('/message',[contcatController::class,'message']);
+Route::get('/delete/{id}', [contcatController::class,'delete']);
+// Route::get('/admin',[contcatController::class,'send']);
